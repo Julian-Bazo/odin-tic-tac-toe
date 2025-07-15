@@ -163,43 +163,84 @@ const createGame = (player1, player2) => {
         xMove,
         oMove,
         printGameBoard,
-        pointChecker
+        pointChecker,
     };
 }
 
+// DOM Manipulation
+const utilitiesContainer = document.querySelector(".utilities-container");
+const submitButton = document.querySelector(".submit-button");
+const nameP1 = document.querySelector(".p1");
+const nameP2 = document.querySelector(".p2");
+const nameForm = document.querySelector(".name-form");
+
+submitButton.addEventListener("click", () => {
+    event.preventDefault();
+    let player1 = nameP1.value.toString();
+    let player2 = nameP2.value.toString();
+    const realGame = createGame(player1, player2);
+    nameForm.style.display = "none";
+    const gameAnnouncer = document.createElement("p")
+    gameAnnouncer.classList.add("announcer");
+    gameAnnouncer.textContent = `${player1}'s turn!`;
+    utilitiesContainer.appendChild(gameAnnouncer);
+    console.log(realGame.reportScore());
+
+    let turnChecker = true;
+
+    const gameBoardGrid = document.querySelectorAll(".tile");
+    let gameBoardArray = Array.from(gameBoardGrid);
+    gameBoardArray.map((tile) => {
+        tile.addEventListener("click", () => {
+            if (turnChecker === true) {
+                tile.textContent = "X";
+                turnChecker = false;
+                gameAnnouncer.textContent = `${player2}'s turn!`
+            }
+            else {
+                tile.textContent = "O";
+                turnChecker = true;
+                gameAnnouncer.textContent = `${player1}'s turn!`
+            }
+
+        })
+    })
+})
+
+
 
 // Test code
-const game = createGame("Mark", "Bob");
+// const game = createGame("Mark", "Bob");
 
-game.xMove(0);
-game.xMove(3);
-game.printGameBoard();
-game.xMove(6);
-console.log(game.reportScore());
+// game.xMove(0);
+// game.xMove(3);
+// game.printGameBoard();
+// game.xMove(6);
+// console.log(game.reportScore());
 
-game.xMove(0);
-game.xMove(3);
-game.printGameBoard();
-game.xMove(6);
-console.log(game.reportScore());
+// game.xMove(0);
+// game.xMove(3);
+// game.printGameBoard();
+// game.xMove(6);
+// console.log(game.reportScore());
 
-game.xMove(0);
-game.xMove(3);
-game.printGameBoard();
-game.xMove(6);
-console.log(game.reportScore());
+// game.xMove(0);
+// game.xMove(3);
+// game.printGameBoard();
+// game.xMove(6);
+// console.log(game.reportScore());
 
-game.xMove(0);
-game.xMove(3);
-game.printGameBoard();
-game.xMove(6);
-console.log(game.reportScore());
+// game.xMove(0);
+// game.xMove(3);
+// game.printGameBoard();
+// game.xMove(6);
+// console.log(game.reportScore());
 
-game.oMove(0);
-game.oMove(1);
-game.printGameBoard();
-game.oMove(2);
+// game.oMove(0);
+// game.oMove(1);
+// game.printGameBoard();
+// game.oMove(2);
 
-console.log(game.reportScore());
-game.printGameBoard();
+// console.log(game.reportScore());
+// game.printGameBoard();
 
