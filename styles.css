@@ -1,0 +1,27 @@
+body {
+    margin-left: 1rem;
+}
+
+.gameboard {
+    display: grid;
+    grid-template: repeat(3, 5rem) / repeat(3, 5rem);
+    outline: chartreuse 2px solid;
+}
+
+.gameboard>div {
+    background-color: #eee;
+    border: black 2px solid;
+    cursor: pointer;
+}
+
+.name-form {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 8rem;
+    margin-bottom: 2rem;
+}
+
+.submit-button {
+    margin-top: 1rem;
+}
