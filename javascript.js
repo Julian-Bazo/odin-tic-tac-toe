@@ -111,7 +111,8 @@ const createGame = (player1, player2) => {
     const givePointsX = () => {
         xPoints++;
         if (xPoints >= 3) {
-            return endGame();
+            endGame();
+            resetGame();
         }
         else {
             return `${player1} has scored a point!\n\n${reportScore()}`;
@@ -121,7 +122,8 @@ const createGame = (player1, player2) => {
     const givePointsO = () => {
         oPoints++;
         if (oPoints >= 3) {
-            return endGame()
+            endGame();
+            resetGame();
         }
         else {
             return `${player2} has scored a point!\n\n${reportScore()}`;
@@ -134,7 +136,7 @@ const createGame = (player1, player2) => {
 
     const endGame = () => {
         if (xPoints >= 3) {
-            return `${player1} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`;
+            return console.log(`${player1} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`);
         }
         if (oPoints >= 3) {
             return `${player2} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`;
@@ -150,7 +152,6 @@ const createGame = (player1, player2) => {
     const resetGame = () => {
         xPoints = 0;
         oPoints = 0;
-        resetGameBoard();
     }
 
     return {
@@ -194,10 +195,10 @@ game.printGameBoard();
 game.xMove(6);
 console.log(game.reportScore());
 
-// game.oMove(0);
-// game.oMove(1);
-// game.printGameBoard();
-// game.oMove(2);
+game.oMove(0);
+game.oMove(1);
+game.printGameBoard();
+game.oMove(2);
 
 console.log(game.reportScore());
 game.printGameBoard();
