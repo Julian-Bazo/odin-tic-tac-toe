@@ -5,6 +5,21 @@ const createGame = (player1, player2) => {
     this.player2 = player2;
     let player1Marker = "X";
     let player2Marker = "O";
+    let gameBoard = [];
+    gameBoard.length = 8;
+    console.log(gameBoard);
+
+    const xMove = (index) => {
+        return gameBoard[index] = player1Marker;
+    }
+
+    const oMove = (index) => {
+        return gameBoard[index] = player2Marker;
+    }
+
+    const printGameBoard = () => {
+        console.log(gameBoard);
+    }
 
     const givePointsX = () => {
         xPoints++;
@@ -12,7 +27,7 @@ const createGame = (player1, player2) => {
             return endGame()
         }
         else {
-            return `${player1} has scored a point!`, reportScore();
+            return `${player1} has scored a point!\n\n${reportScore()}`;
         }
     }
 
@@ -22,7 +37,7 @@ const createGame = (player1, player2) => {
             return endGame()
         }
         else {
-            return `${player2} has scored a point!` && reportScore();
+            return `${player2} has scored a point!\n\n${reportScore()}`;
         }
     }
 
@@ -32,21 +47,34 @@ const createGame = (player1, player2) => {
 
     const endGame = () => {
         if (xPoints === 3) {
-            return `${player1} wins!\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`;
+            return `${player1} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`;
         }
         if (oPoints === 3) {
-            return `${player2} wins!\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`;
+            return `${player2} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`;
         }
+    }
+
+    const resetGame = () => {
+        xPoints = 0;
+        oPoints = 0;
+        gameBoard = [];
+        gameBoard.length = 8;
     }
 
     return {
         givePointsX, 
         givePointsO, 
         reportScore,
-        endGame
+        endGame,
+        resetGame,
+        xMove,
+        oMove,
+        printGameBoard
     };
 }
 
+
+// Test code
 const game = createGame("Mark", "Bob");
 console.log(game.givePointsO());
 console.log(game.givePointsO());
@@ -54,4 +82,15 @@ console.log(game.givePointsX());
 console.log(game.givePointsX());
 console.log(game.givePointsO());
 console.log(game.givePointsX());
+game.resetGame();
+console.log(game.reportScore());
+console.log(game.givePointsO());
+console.log(game.givePointsO());
+
+console.log(game.xMove(3));
+console.log(game.oMove(8));
+console.log(game.printGameBoard());
+
+game.resetGame();
+console.log(game.printGameBoard());
 
