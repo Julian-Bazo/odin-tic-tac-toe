@@ -196,17 +196,22 @@ submitButton.addEventListener("click", () => {
                 tile.textContent = "X";
                 turnChecker = false;
                 gameAnnouncer.textContent = `${player2}'s turn!`
+                tile.disabled = true;
             }
             else {
                 tile.textContent = "O";
                 turnChecker = true;
                 gameAnnouncer.textContent = `${player1}'s turn!`
+                tile.disabled = true;
             }
 
         })
     })
 })
 
+// TO DO
+// Make it so that event listeners are removed once a div is clicked
+// Tie in factory functions on button clicks
 
 
 // Test code

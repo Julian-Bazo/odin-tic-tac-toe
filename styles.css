@@ -37,4 +37,14 @@ body {
     font-size: 4rem;
     text-align: center;
     vertical-align: center;
+    border: black 2px solid;
+    background-color: white;
+    cursor: pointer;
+}
+
+.tile:disabled {
+    opacity: 1;
+    border: black 2px solid;
+    background-color: white;
+    cursor: not-allowed;
 }
