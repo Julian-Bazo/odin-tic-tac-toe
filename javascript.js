@@ -7,6 +7,7 @@ const createGame = (player1, player2) => {
     let player2Marker = 'O';
     let gameBoard = [];
     gameBoard.length = 8;
+    let tileChecker = 0;
 
     const xMove = (index) => {
         gameBoard[index] = player1Marker;
@@ -101,6 +102,27 @@ const createGame = (player1, player2) => {
             givePointsO();
             resetGameBoard();
         }
+
+        // Check for a tie game
+        if (tieCheck() === true) {
+            scoreBoard.innerText = `It's a tie! Resetting board...\n\n${reportScore()}`;
+            resetGameBoard();
+        }
+    }
+
+    const tieCheck = () => {
+        tileChecker = 0;
+        gameBoardArray.map((tile) => {
+            if (tile.disabled === true) {
+                tileChecker++;
+            }
+        })
+        if (tileChecker >= 9) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     // REMOVE later
@@ -168,6 +190,7 @@ const createGame = (player1, player2) => {
         oMove,
         printGameBoard,
         pointChecker,
+        tieCheck
     };
 }
 
@@ -205,6 +228,7 @@ submitButton.addEventListener("click", () => {
 
     let turnChecker = true;
 
+
     gameBoardArray.map((tile) => {
         tile.addEventListener("click", () => {
             if (turnChecker === true) {
@@ -213,7 +237,6 @@ submitButton.addEventListener("click", () => {
                 gameAnnouncer.textContent = `${player2}'s turn!`
                 tile.disabled = true;
                 realGame.xMove(tile.id);
-                realGame.printGameBoard();
             }
             else {
                 tile.textContent = "O";
@@ -221,7 +244,6 @@ submitButton.addEventListener("click", () => {
                 gameAnnouncer.textContent = `${player1}'s turn!`
                 tile.disabled = true;
                 realGame.oMove(tile.id);
-                realGame.printGameBoard();
             }
 
         })
@@ -231,39 +253,3 @@ submitButton.addEventListener("click", () => {
 // TO DO
 // Make it so that event listeners are removed once a div is clicked
 // Tie in factory functions on button clicks
-
-
-// Test code
-// const game = createGame("Mark", "Bob");
-
-// game.xMove(0);
-// game.xMove(3);
-// game.printGameBoard();
-// game.xMove(6);
-// console.log(game.reportScore());
-
-// game.xMove(0);
-// game.xMove(3);
-// game.printGameBoard();
-// game.xMove(6);
-// console.log(game.reportScore());
-
-// game.xMove(0);
-// game.xMove(3);
-// game.printGameBoard();
-// game.xMove(6);
-// console.log(game.reportScore());
-
-// game.xMove(0);
-// game.xMove(3);
-// game.printGameBoard();
-// game.xMove(6);
-// console.log(game.reportScore());
-
-// game.oMove(0);
-// game.oMove(1);
-// game.printGameBoard();
-// game.oMove(2);
-
-// console.log(game.reportScore());
-// game.printGameBoard();
