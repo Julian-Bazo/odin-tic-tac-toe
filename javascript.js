@@ -158,11 +158,13 @@ const createGame = (player1, player2) => {
 
     const endGame = () => {
         if (xPoints >= 3) {
-            return console.log(`${player1} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`);
+            scoreBoard.innerText = `${player1} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}\n\n Enter new names to play again!`;
         }
         if (oPoints >= 3) {
-            return `${player2} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}`;
+            scoreBoard.innerText = `${player2} wins!\n\nFinal Score: ${player1}: ${xPoints} | ${player2}: ${oPoints}\n\n Enter new names to play again!`;
         }
+        nameForm.style.display = "flex";
+        utilitiesContainer.removeChild(gameAnnouncer);
     }
 
     const resetGameBoard = () => {
@@ -201,6 +203,8 @@ const nameP1 = document.querySelector(".p1");
 const nameP2 = document.querySelector(".p2");
 const nameForm = document.querySelector(".name-form");
 const scoreBoard = document.querySelector(".score-p");
+const gameAnnouncer = document.createElement("p")
+    gameAnnouncer.classList.add("announcer");
 
 const gameBoardGrid = document.querySelectorAll(".tile");
 let gameBoardArray = Array.from(gameBoardGrid);
@@ -218,10 +222,9 @@ submitButton.addEventListener("click", () => {
         player2 = "Player 2";
     }
 
+    scoreBoard.innerText = "NEW GAME! Let's get started!"
     const realGame = createGame(player1, player2);
     nameForm.style.display = "none";
-    const gameAnnouncer = document.createElement("p")
-    gameAnnouncer.classList.add("announcer");
     gameAnnouncer.textContent = `${player1}'s turn!`;
     utilitiesContainer.appendChild(gameAnnouncer);
     console.log(realGame.reportScore());
