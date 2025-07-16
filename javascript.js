@@ -115,7 +115,7 @@ const createGame = (player1, player2) => {
             resetGame();
         }
         else {
-            return `${player1} has scored a point!\n\n${reportScore()}`;
+            scoreBoard.innerText = `${player1} has scored a point!\n\n${reportScore()}`;
         }
     }
 
@@ -126,7 +126,7 @@ const createGame = (player1, player2) => {
             resetGame();
         }
         else {
-            return `${player2} has scored a point!\n\n${reportScore()}`;
+            scoreBoard.innerText = `${player2} has scored a point!\n\n${reportScore()}`;
         }
     }
 
@@ -146,6 +146,10 @@ const createGame = (player1, player2) => {
     const resetGameBoard = () => {
         gameBoard = [];
         gameBoard.length = 8
+        gameBoardArray.map((tile) => {
+            tile.textContent = "";
+            tile.disabled = false;
+        })
         return gameBoard;
     }
 
@@ -173,6 +177,10 @@ const submitButton = document.querySelector(".submit-button");
 const nameP1 = document.querySelector(".p1");
 const nameP2 = document.querySelector(".p2");
 const nameForm = document.querySelector(".name-form");
+const scoreBoard = document.querySelector(".score-p");
+
+const gameBoardGrid = document.querySelectorAll(".tile");
+let gameBoardArray = Array.from(gameBoardGrid);
 
 submitButton.addEventListener("click", () => {
     event.preventDefault();
@@ -197,8 +205,6 @@ submitButton.addEventListener("click", () => {
 
     let turnChecker = true;
 
-    const gameBoardGrid = document.querySelectorAll(".tile");
-    let gameBoardArray = Array.from(gameBoardGrid);
     gameBoardArray.map((tile) => {
         tile.addEventListener("click", () => {
             if (turnChecker === true) {
@@ -206,12 +212,16 @@ submitButton.addEventListener("click", () => {
                 turnChecker = false;
                 gameAnnouncer.textContent = `${player2}'s turn!`
                 tile.disabled = true;
+                realGame.xMove(tile.id);
+                realGame.printGameBoard();
             }
             else {
                 tile.textContent = "O";
                 turnChecker = true;
                 gameAnnouncer.textContent = `${player1}'s turn!`
                 tile.disabled = true;
+                realGame.oMove(tile.id);
+                realGame.printGameBoard();
             }
 
         })

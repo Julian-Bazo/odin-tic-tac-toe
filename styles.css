@@ -48,3 +48,7 @@ body {
     background-color: white;
     cursor: not-allowed;
 }
+
+.score-p {
+    font-size: 1.3rem;
+}
