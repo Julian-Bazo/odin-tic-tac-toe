@@ -222,15 +222,14 @@ submitButton.addEventListener("click", () => {
         player2 = "Player 2";
     }
 
-    scoreBoard.innerText = "NEW GAME! Let's get started!"
+    scoreBoard.innerText = "NEW GAME! Let's get started!\n\nFirst to win three rounds wins!"
     const realGame = createGame(player1, player2);
     nameForm.style.display = "none";
     gameAnnouncer.textContent = `${player1}'s turn!`;
     utilitiesContainer.appendChild(gameAnnouncer);
     console.log(realGame.reportScore());
-
+    
     let turnChecker = true;
-
 
     gameBoardArray.map((tile) => {
         tile.addEventListener("click", () => {
@@ -254,5 +253,4 @@ submitButton.addEventListener("click", () => {
 })
 
 // TO DO
-// Make it so that event listeners are removed once a div is clicked
-// Tie in factory functions on button clicks
+// Add reset button
