@@ -176,8 +176,17 @@ const nameForm = document.querySelector(".name-form");
 
 submitButton.addEventListener("click", () => {
     event.preventDefault();
+    
     let player1 = nameP1.value.toString();
     let player2 = nameP2.value.toString();
+
+    if (player1 === ""){
+        player1 = "Player 1";
+    }
+    if (player2 === ""){
+        player2 = "Player 2";
+    }
+
     const realGame = createGame(player1, player2);
     nameForm.style.display = "none";
     const gameAnnouncer = document.createElement("p")
@@ -248,4 +257,3 @@ submitButton.addEventListener("click", () => {
 
 // console.log(game.reportScore());
 // game.printGameBoard();
-
